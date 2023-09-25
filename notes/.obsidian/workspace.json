@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "27b89c0c0a0015a1",
+            "id": "bfbe98753475741a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -16,6 +16,16 @@
                 "file": "Session 1/MolSim - Session 1.md",
                 "mode": "source",
                 "source": false
+              }
+            }
+          },
+          {
+            "id": "422b3eec1c96fe4a",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "Session 1/Data/force_strength.png"
               }
             }
           }
@@ -69,7 +79,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 483.500732421875
   },
   "right": {
     "id": "705d36ad33fb9c0e",
@@ -146,25 +156,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "27b89c0c0a0015a1",
+  "active": "bfbe98753475741a",
   "lastOpenFiles": [
-    "MolSim.md",
+    "Session 1/Data/force_strength.png",
     "Session 1/MolSim - Session 1.md",
+    "Session 1/Data/Pasted image 20230925093236.png",
+    "Session 1/Data/newtons_second_law.png",
+    "Session 1/Data/Pasted image 20230925084601.png",
+    "Session 1/Data/electrical_permeability.png",
+    "Session 1/Data/universal_gravity.png",
+    "Session 1/Data/Pasted image 20230918222607.png",
+    "Session 1/Data/Pasted image 20230918213530.png",
+    "Pasted.md",
+    "Session 1/Data/coulombs_law.png",
+    "Session 1/Data/electron_difrac_exp.gif",
+    "Session 1/Data/Electron_buildup_movie_from_ Controlled_double-slit_electron_diffraction _Roger_Bach_et_al_2013_New_J._Phys._15_033018.gif.md",
+    "MolSim.md",
     "'/Session.md",
     "'",
     "Session 1/Data",
-    "Session 1/Data/Methane-CRC-MW-3D-balls.png",
-    "Session 1/Data/Dipoli_acqua.png",
-    "Session 1/Data/Pasted image 20230925102825.png",
-    "Session 1/Data/Hydrogen-bonding-in-water-2D.svg",
-    "Session 1/Data/NH3-BF3-adduct-bond-lengthening-2D.png",
-    "Session 1/Data/Electron_buildup_movie_from_ Controlled_double-slit_electron_diffraction _Roger_Bach_et_al_2013_New_J._Phys._15_033018.gif.md",
-    "Session 1/Data/Pasted image 20230925084601.png",
     "2023-09-25.md",
-    "Session 1/Data/Pasted image 20230925093219.png",
-    "Session 1/Data/Pasted image 20230925093236.png",
-    "Session 1/Data/Thermally_Agitated_Molecule.gif",
-    "Session 1/Data/Meta-stability.svg.png",
     "().md",
     "Session 1/().md",
     "Session 1",
