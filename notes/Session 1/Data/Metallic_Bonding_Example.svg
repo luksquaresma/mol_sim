@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="170" height="140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <g id="m" transform="translate(-4.4681,-1.3981)">
+  <g id="k">
+   <g id="j">
+    <g id="l" transform="matrix(1 0 0 -1 -.69135 19.251)">
+     <circle cx="11.5" cy="10.78" r="5" fill="#6d9eeb" stroke="#15c"/>
+     <path d="m9.5 10.78h4" fill="none" stroke="#000" stroke-width="1.5"/>
+    </g>
+    <use transform="translate(31.464)" xlink:href="#l"/>
+   </g>
+   <use transform="translate(62.928)" xlink:href="#j"/>
+   <use transform="translate(125.86)" xlink:href="#j"/>
+  </g>
+  <use transform="translate(0,31.464)" xlink:href="#k"/>
+ </g>
+ <use transform="translate(-4.4681 124.46)" xlink:href="#k"/>
+ <use transform="translate(0,62.928)" xlink:href="#m"/>
+ <g id="p" transform="translate(-4.4681,-1.3981)">
+  <g id="o">
+   <g id="n">
+    <g id="i" transform="matrix(1 0 0 -1 .84058 46.832)">
+     <circle cx="25.7" cy="22.63" r="10" fill="#c00" stroke="#980000"/>
+     <path d="m22.7 22.63h6" fill="none" stroke="#000"/>
+     <path d="m25.7 25.63v-6" fill="none" stroke="#000"/>
+    </g>
+    <use transform="translate(31.464)" xlink:href="#i"/>
+   </g>
+   <use transform="translate(125.86)" xlink:href="#i"/>
+   <use transform="translate(62.928)" xlink:href="#n"/>
+  </g>
+  <use transform="translate(0,31.464)" xlink:href="#o"/>
+ </g>
+ <use transform="translate(0,62.928)" xlink:href="#p"/>
+</svg>

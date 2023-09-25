@@ -1,4 +1,8 @@
 {
   "accentColor": "",
-  "theme": "moonstone"
+  "theme": "moonstone",
+  "baseFontSize": 13,
+  "interfaceFontFamily": "DejaVu Sans Mono",
+  "textFontFamily": "DejaVu Sans Mono",
+  "monospaceFontFamily": "DejaVu Sans Mono"
 }
