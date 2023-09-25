@@ -80,40 +80,40 @@ Taking a pure utilitarian point of view of an engineer, it can be clearly shown 
 - How can we "see" the atom?
 - Metal -> Particle -> Grain -> Molecule -> Atom -> Quark -> (strings etc?)
 ### **Metals: the first standard for studying solids and the structure of materials.** 
-![](CrystalGrain.jpeg)
-([Micrograph of a polycrystalline metal](https://en.wikipedia.org/wiki/Grain_boundary#/media/File:CrystalGrain.jpg))
+![](Data/CrystalGrain.jpeg)
+([Micrograph of a polycrystalline metal](Data/https://en.wikipedia.org/wiki/Grain_boundary#/media/File:CrystalGrain.jpg))
 
 ### The rigid sphere model for metals
-![](The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced.png)
-([Face-centered cubic (FCC) unit cell](https://www.researchgate.net/figure/The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced_fig5_322291448))
+![](Data/The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced.png)
+([Face-centered cubic (FCC) unit cell](Data/https://www.researchgate.net/figure/The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced_fig5_322291448))
 	
 ### Deeper look: Seeing inside the grains
 Transmission microscopes and the diffraction phenomena:
-![](saed-lens.png)
-([TEM - SAED - Lenses](https://www.researchgate.net/figure/Schematic-ray-diagrams-in-a-TEM-column-showing-the-operation-of-the-post-specimen-lenses_fig4_244749061))
+![](Data/saed-lens.png)
+([TEM - SAED - Lenses](Data/https://www.researchgate.net/figure/Schematic-ray-diagrams-in-a-TEM-column-showing-the-operation-of-the-post-specimen-lenses_fig4_244749061))
 
-![](Difrakce.png)
-([Cristal Diffraction](https://en.wikipedia.org/wiki/File:Difrakce.png))
+![](Data/Difrakce.png)
+([Cristal Diffraction](Data/https://en.wikipedia.org/wiki/File:Difrakce.png))
 
- ![](Crystal_orientation_and_diffraction.gif) ([Diffraction simulation for Mg](https://en.wikipedia.org/wiki/Selected_area_diffraction#/media/File:Crystal_orientation_and_diffraction.gif))
+ ![](Data/Crystal_orientation_and_diffraction.gif) ([Diffraction simulation for Mg](Data/https://en.wikipedia.org/wiki/Selected_area_diffraction#/media/File:Crystal_orientation_and_diffraction.gif))
 
 ---
 ## Wave-particle behavior
 
 ### Expected behavior for particles:
-![](8_2a.JPG)
-([Quantum Mechanics Important Points](https://www.geo.arizona.edu/xtal/nats101/s02-17.html))
+![](Data/8_2a.JPG)
+([Quantum Mechanics Important Points](Data/https://www.geo.arizona.edu/xtal/nats101/s02-17.html))
 
 ### Expected behavior for waves (diffraction):
-![](8_2b.JPG)
-([Quantum Mechanics Important Points](https://www.geo.arizona.edu/xtal/nats101/s02-17.html))
+![](Data/8_2b.JPG)
+([Quantum Mechanics Important Points](Data/https://www.geo.arizona.edu/xtal/nats101/s02-17.html))
 
-![](Doubleslit-electron.gif)
-([Double-slit experiment](https://en.wikipedia.org/wiki/File:Doubleslit.gif))
+![](Data/Doubleslit-electron.gif)
+([Double-slit experiment](Data/https://en.wikipedia.org/wiki/File:Doubleslit.gif))
 
 ### Actual behavior of the electron (particle-wave duality):
-![](electron_difrac_exp.gif)
-([Wikipedia: Wave–particle duality](https://en.wikipedia.org/wiki/Wave%E2%80%93particle_duality))
+![](Data/electron_difrac_exp.gif)
+([Wikipedia: Wave–particle duality](Data/https://en.wikipedia.org/wiki/Wave%E2%80%93particle_duality))
 
 ---
 ---
@@ -121,76 +121,76 @@ Transmission microscopes and the diffraction phenomena:
 # Iterations between atoms
 ---
 ### How to describe movement?
-![](newtons_second_law.png)
-([Wikipedia: Newton's laws of motion](https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion))
+![](Data/newtons_second_law.png)
+([Wikipedia: Newton's laws of motion](Data/https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion))
 
 ---
 ## Forces
 ### Gravity:
-![](universal_gravity.png) ([Wikipedia: Newton's law of universal gravitation](https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation))
- ![](Gravity_Big_G_Measurements_NIST.png) ([Wikipedia: G constant](https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation#/media/File:Gravity_Big_G_Measurements_NIST.png))
+![](Data/universal_gravity.png) ([Wikipedia: Newton's law of universal gravitation](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation))
+ ![](Data/Gravity_Big_G_Measurements_NIST.png) ([Wikipedia: G constant](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation#/media/File:Gravity_Big_G_Measurements_NIST.png))
 
 ### Electric force (Coulomb's Law):
-![](coulombs_law.png) ([Wikipedia: Coulomb's law](https://en.wikipedia.org/wiki/Coulomb%27s_law))
-![](electrical_permeability.png) ([Vacuum permittivity](https://en.wikipedia.org/wiki/Vacuum_permittivity))
+![](Data/coulombs_law.png) ([Wikipedia: Coulomb's law](Data/https://en.wikipedia.org/wiki/Coulomb%27s_law))
+![](Data/electrical_permeability.png) ([Vacuum permittivity](Data/https://en.wikipedia.org/wiki/Vacuum_permittivity))
 ### Weak force:
-- [Wikipedia: Weak interaction](https://en.wikipedia.org/wiki/Weak_interaction)
+- [Wikipedia: Weak interaction](Data/https://en.wikipedia.org/wiki/Weak_interaction)
 ### Strong force:
-- [Wikipedia: Strong interaction](https://en.wikipedia.org/wiki/Strong_interaction)
+- [Wikipedia: Strong interaction](Data/https://en.wikipedia.org/wiki/Strong_interaction)
 
 ---
 ## Atomic bonds
 There are three types of atomic bonds, they are:
 ### Ionic bond:
-![](NaF.gif)
-([Wikipedia: Ionic bonding](https://en.wikipedia.org/wiki/Ionic_bonding))
+![](Data/NaF.gif)
+([Wikipedia: Ionic bonding](Data/https://en.wikipedia.org/wiki/Ionic_bonding))
  
 ### Covalent bond:
-![](Pi-Bond.svg)
-([Wikipedia: Chemical bond](https://en.wikipedia.org/wiki/Chemical_bond))
+![](Data/Pi-Bond.svg)
+([Wikipedia: Chemical bond](Data/https://en.wikipedia.org/wiki/Chemical_bond))
 
-![](Covalent.svg)
-([Wikipedia: Covalent bond](https://en.wikipedia.org/wiki/Covalent_bond)]
+![](Data/Covalent.svg)
+([Wikipedia: Covalent bond](Data/https://en.wikipedia.org/wiki/Covalent_bond)]
 
-![](Graphical_comparison_of_bonds(1).svg)
-([Wikipedia: Molecular orbital](https://en.wikipedia.org/wiki/Covalent_bond)]
+![](Data/Graphical_comparison_of_bonds(1).svg)
+([Wikipedia: Molecular orbital](Data/https://en.wikipedia.org/wiki/Covalent_bond)]
 
 ### Metallic bond:
-![](image-10-1024x703-1.png)
-([ChemTalk: Metallic Bonding](https://chemistrytalk.org/metallic-bonding/))
+![](Data/image-10-1024x703-1.png)
+([ChemTalk: Metallic Bonding](Data/https://chemistrytalk.org/metallic-bonding/))
 
 ---
 ## Molecular behavior
 ### Stability concept:
-![](Thermally_Agitated_Molecule.gif)
-([Wikipedia: Temperature](https://en.wikipedia.org/wiki/Temperature))
-![](Meta-stability.svg.png)
-([Wikipedia: Metastability](https://en.wikipedia.org/wiki/Metastability))
+![](Data/Thermally_Agitated_Molecule.gif)
+([Wikipedia: Temperature](Data/https://en.wikipedia.org/wiki/Temperature))
+![](Data/Meta-stability.svg.png)
+([Wikipedia: Metastability](Data/https://en.wikipedia.org/wiki/Metastability))
 
 ### Minimization of energy: bond length and molecule states
-![](NH3-BF3-adduct-bond-lengthening-2D.png)
-([Wikipedia: Coordinate covalent bond (dipolar bond)](https://en.wikipedia.org/wiki/Chemical_bond))
+![](Data/NH3-BF3-adduct-bond-lengthening-2D.png)
+([Wikipedia: Coordinate covalent bond (dipolar bond)](Data/https://en.wikipedia.org/wiki/Chemical_bond))
 
 ### Polarity:
-![](Dipoli_acqua.png)
-([**Water molecule polarity** | Wikipedia: Chemical polarity](https://en.wikipedia.org/wiki/Chemical_polarity))
+![](Data/Dipoli_acqua.png)
+([**Water molecule polarity** | Wikipedia: Chemical polarity](Data/https://en.wikipedia.org/wiki/Chemical_polarity))
 
-![](Methane-CRC-MW-3D-balls.png)
-([**Methane molecule polarity** | Wikipedia: Chemical polarity](https://en.wikipedia.org/wiki/Chemical_polarity))
+![](Data/Methane-CRC-MW-3D-balls.png)
+([**Methane molecule polarity** | Wikipedia: Chemical polarity](Data/https://en.wikipedia.org/wiki/Chemical_polarity))
 
 ---
 ---
 ---
 # Interactions between isolated molecules
 ### Dipole-dipole:
-![](Hydrogen-bonding-in-water-2D.svg)
-([Wikipedia: Chemical bond](https://en.wikipedia.org/wiki/Chemical_bond))
+![](Data/Hydrogen-bonding-in-water-2D.svg)
+([Wikipedia: Chemical bond](Data/https://en.wikipedia.org/wiki/Chemical_bond))
 ### Van-der-Waals forces:
 - Keesom force (permanent dipole – permanent dipole)
 - Debye force (permanent dipoles–induced dipoles)
 - London dispersion force (fluctuating dipole–induced dipole interaction)
 
-![](force_strength.png)
+![](Data/force_strength.png)
 
 ---
 ---
