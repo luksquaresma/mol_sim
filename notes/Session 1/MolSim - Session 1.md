@@ -86,7 +86,7 @@ Taking a pure utilitarian point of view of an engineer, it can be clearly shown 
 ### The rigid sphere model for metals
 ![](Data/The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced.png)
 ([Face-centered cubic (FCC) unit cell](Data/https://www.researchgate.net/figure/The-FCC-crystal-structure-a-hard-sphere-unit-cell-representation-b-a-reduced_fig5_322291448))
-	
+
 ### Deeper look: Seeing inside the grains
 Transmission microscopes and the diffraction phenomena:
 ![](Data/saed-lens.png)
@@ -95,7 +95,8 @@ Transmission microscopes and the diffraction phenomena:
 ![](Data/Difrakce.png)
 ([Cristal Diffraction](Data/https://en.wikipedia.org/wiki/File:Difrakce.png))
 
- ![](Data/Crystal_orientation_and_diffraction.gif) ([Diffraction simulation for Mg](Data/https://en.wikipedia.org/wiki/Selected_area_diffraction#/media/File:Crystal_orientation_and_diffraction.gif))
+ ![](Data/Crystal_orientation_and_diffraction.gif)
+ ([Diffraction simulation for Mg](Data/https://en.wikipedia.org/wiki/Selected_area_diffraction#/media/File:Crystal_orientation_and_diffraction.gif))
 
 ---
 ## Wave-particle behavior
@@ -127,12 +128,16 @@ Transmission microscopes and the diffraction phenomena:
 ---
 ## Forces
 ### Gravity:
-![](Data/universal_gravity.png) ([Wikipedia: Newton's law of universal gravitation](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation))
- ![](Data/Gravity_Big_G_Measurements_NIST.png) ([Wikipedia: G constant](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation#/media/File:Gravity_Big_G_Measurements_NIST.png))
+![](Data/universal_gravity.png)
+([Wikipedia: Newton's law of universal gravitation](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation))
+ ![](Data/Gravity_Big_G_Measurements_NIST.png)
+ ([Wikipedia: G constant](Data/https://en.wikipedia.org/wiki/Newton's_law_of_universal_gravitation#/media/File:Gravity_Big_G_Measurements_NIST.png))
 
 ### Electric force (Coulomb's Law):
-![](Data/coulombs_law.png) ([Wikipedia: Coulomb's law](Data/https://en.wikipedia.org/wiki/Coulomb%27s_law))
-![](Data/electrical_permeability.png) ([Vacuum permittivity](Data/https://en.wikipedia.org/wiki/Vacuum_permittivity))
+![](Data/coulombs_law.png)
+([Wikipedia: Coulomb's law](Data/https://en.wikipedia.org/wiki/Coulomb%27s_law))
+![](Data/electrical_permeability.png)
+([Vacuum permittivity](Data/https://en.wikipedia.org/wiki/Vacuum_permittivity))
 ### Weak force:
 - [Wikipedia: Weak interaction](Data/https://en.wikipedia.org/wiki/Weak_interaction)
 ### Strong force:
@@ -150,7 +155,7 @@ There are three types of atomic bonds, they are:
 ([Wikipedia: Chemical bond](Data/https://en.wikipedia.org/wiki/Chemical_bond))
 
 ![](Data/Covalent.svg)
-([Wikipedia: Covalent bond](Data/https://en.wikipedia.org/wiki/Covalent_bond)]
+([Wikipedia: Covalent bond](Data/https://en.wikipedia.org/wiki/Covalent_bond))
 
 ![](Data/Graphical_comparison_of_bonds(1).svg)
 ([Wikipedia: Molecular orbital](Data/https://en.wikipedia.org/wiki/Covalent_bond)]
