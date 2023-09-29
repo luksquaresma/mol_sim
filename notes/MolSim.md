@@ -4,7 +4,6 @@
 ---
 ---
 # MolSim - a molecular simulation tool made in rust
-https://github.com/luksquaresma/mol_sim
 ---
 ## Motivation
 
@@ -16,6 +15,10 @@ This is an educational project made with the intention to show all the steps in 
 ## Info
 The notes for each session are done separate pages and will be available and linked below. The relevant links regarding the project and the author are shown below the title of all pages.
 
+***Links:***
+- https://github.com/luksquaresma/mol_sim
+- https://www.linkedin.com/in/luksquaresma/
+- https://twitter.com/wtflks	
 ---
 ## Code with me sessions
 #todo
