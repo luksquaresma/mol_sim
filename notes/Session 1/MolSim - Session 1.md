@@ -215,10 +215,10 @@ There are three types of atomic bonds, they are:
 
 ### How can we represent molecules in a 3D space?
 - Current state:
-	- ==Position==: 3D vector (m)
-	- ==Orientation==: 3D vector (degrees)
-	- ==Velocity==: 3D vector (m/s)
-	- ==Angular velocity==: (degrees/s)
+	- ==Position==: 3D vector (m) (Vec<Vec<f32>>)
+	- ==Orientation==: 3D vector (degrees)  (Vec<Vec<f32>>)
+	- ==Velocity==: 3D vector (m/s)  (Vec<Vec<f32>>)
+	- ==Angular velocity==: (degrees/s)  (Vec<Vec<f32>>)
 - How change occur?
 	- With the environment: force fields
 	- With itself:

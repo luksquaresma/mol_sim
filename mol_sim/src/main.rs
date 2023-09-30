@@ -19,13 +19,6 @@ pub struct Conditions {
     pub ave_ini: [[f32; 2]; 2], // angular velocity initializer (degrees/s)
 }
 
-pub trait DataStructure {
-    fn get_keys(&self) -> Vec<String>;
-    // fn get_info_qty(&self) -> usize;
-    fn get_value(&self, k:i32) -> Vec<Vec<f32>>;
-    // fn get_contents(&self) -> [(String, Vec<Vec<f32>>); 7];
-}
-
 pub struct State {
     pub pos: Vec<Vec<f32>>, // position (m) - has to be inside the position domain
     pub vel: Vec<Vec<f32>>, // velocity (m/s) - any real value
@@ -33,29 +26,40 @@ pub struct State {
     pub ave: Vec<Vec<f32>>, // angular velocity (degrees/s) - any real value
 }
 
+pub trait DataStructure {
+    fn get_keys(&self) -> Vec<String>;
+    fn get_info_qty(&self) -> usize;
+    fn get_value(&self, k:String) -> &Vec<Vec<f32>>;
+    fn get_contents(&self) -> Vec<String>;
+}
+
 impl DataStructure for State {
     fn get_keys(&self) -> Vec<String> {
-        return vec!["pos".to_string(), "vel".to_string(), "ori".to_string(), "ave".to_string()]
+        return vec![
+            "pos".to_string(), 
+            "vel".to_string(), 
+            "ori".to_string(), 
+            "ave".to_string()
+            ]
     }
-    // fn get_info_qty(&self) -> usize {
-    //     return self.get_keys().len()
-    // }
-    fn get_value(&self, k:i32) -> Vec<Vec<f32>> {
-        return match k {
-            1 => *(&self.pos),
-            2 => *(&self.vel),
-            // "ori".to_string() => &self.ori,
-            // "ave".to_string() => &self.ave,
+    fn get_info_qty(&self) -> usize {
+        return self.get_keys().len()
+    }
+    fn get_value(&self, k:String) -> &Vec<Vec<f32>> {
+        return match k.as_str() {
+            "pos" => &self.pos,
+            "vel" => &self.vel,
+            "ori" => &self.ori,
+            "ave" => &self.ave,
+            &_ => todo!()
         }
     }
-
-    // fn get_keys(&self)     -> Vec<String> {
-        
-    // }
-
-    // fn get_contents(&self) -> ; {
-        
-    // }
+    fn get_contents(&self) -> Vec<String> {    //Vec<(String, Vec<Vec<f32>>)> {
+        return self.get_keys().into_iter().map(
+            |k| k
+            //*self.get_value(*k)
+        ).collect();
+    }
     
 }
 
@@ -100,7 +104,12 @@ fn main() {
     };
 
     let state = create_molecules(starting_cond);
-    println!("{:.2?}", state.get_keys());
+
+    println!("{:.2?}", state.get_contents());
+
+    assert!(true, "Test is NOT WORKING");
+    assert!(state.get_contents() == state.get_keys(), "Test is NOT WORKING");
+
 
 }
 
