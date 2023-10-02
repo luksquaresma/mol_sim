@@ -230,3 +230,6 @@ There are three types of atomic bonds, they are:
 - #todo 
 
 
+D = (1/C0) * 10^(-21) [C*m]
+
+
