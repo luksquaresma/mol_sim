@@ -4,7 +4,7 @@
 /// 
 /// | | Create method to save the created/processed data
 ///     |X| History definition (Vec!<State>) - State(time)
-///     | | Save files in an organized and generalized way
+///     |X| Save files in an organized and generalized way
 ///         |X| Standard serializarion for print MoleculeData
 /// 
 /// | | Create the system iteraction methods and funcitons
@@ -32,11 +32,6 @@ use {
             State
         }
     },
-    serde::{
-        Deserialize,
-        Serialize,
-        Serializer
-    },
     serde_json,
     std::fs::write
 };
@@ -44,7 +39,7 @@ use {
 
 // Processing defs
 pub const DT:f64 = 1./100.;
-pub const MOLECULE_NUMBER:u64 = 1;
+pub const MOLECULE_NUMBER:u64 = 100000;
 pub const POSITION_DOMAIN:[[f64; 2]; 3] = [
     [ 0.,  1.], // [x_min, x_max]
     [ 0.,  2.], // [y_min, y_max]
@@ -66,60 +61,116 @@ pub const ANGULAR_VEL_INIT:[[f64; 2]; 2] = [
 
 
 fn main() {
-    let state_h2 = State::create_randomly_from_intervals(
-        Conditions{
-            mn:      MOLECULE_NUMBER,
-            molecule_type: MolecularType::H2,
-            pos_dom: POSITION_DOMAIN,
-            vel_ini: VELOCITY_INIT,
-            ori_ini: ORIENTATION_INIT,
-            ave_ini: ANGULAR_VEL_INIT
-        }
-    );
-
-    let state_h2o = State::create_randomly_from_intervals(
-        Conditions{
-            mn:      MOLECULE_NUMBER,
-            molecule_type: MolecularType::H2O,
-            pos_dom: POSITION_DOMAIN,
-            vel_ini: VELOCITY_INIT,
-            ori_ini: ORIENTATION_INIT,
-            ave_ini: ANGULAR_VEL_INIT
-        }
-    );
-    let state_co = State::create_randomly_from_intervals(
-        Conditions{
-            mn:      MOLECULE_NUMBER,
-            molecule_type: MolecularType::CO,
-            pos_dom: POSITION_DOMAIN,
-            vel_ini: VELOCITY_INIT,
-            ori_ini: ORIENTATION_INIT,
-            ave_ini: ANGULAR_VEL_INIT
-        }
-    );
-    let state_co2 = State::create_randomly_from_intervals(
-        Conditions{
-            mn:      MOLECULE_NUMBER,
-            molecule_type: MolecularType::CO2,
-            pos_dom: POSITION_DOMAIN,
-            vel_ini: VELOCITY_INIT,
-            ori_ini: ORIENTATION_INIT,
-            ave_ini: ANGULAR_VEL_INIT
-        }
-    );
-    // let new_state = state_h2.couple(state_h2o);
-    // let new_state = state_h2.from_vec_coupling(
-    //     vec![state_h2o, state_co, state_co2]
+    // let state_h2 = State::create_randomly_from_intervals(
+    //     Conditions{
+    //         mn:      MOLECULE_NUMBER,
+    //         molecule_type: MolecularType::H2,
+    //         pos_dom: POSITION_DOMAIN,
+    //         vel_ini: VELOCITY_INIT,
+    //         ori_ini: ORIENTATION_INIT,
+    //         ave_ini: ANGULAR_VEL_INIT
+    //     }
     // );
-    let new_state:states::State = State::from_vec_coupling(
-        vec![state_h2, state_h2o, state_co, state_co2]
-    );
-    let inverted_new_state = new_state.invert();
+    // let state_h2o = State::create_randomly_from_intervals(
+    //     Conditions{
+    //         mn:      MOLECULE_NUMBER,
+    //         molecule_type: MolecularType::H2O,
+    //         pos_dom: POSITION_DOMAIN,
+    //         vel_ini: VELOCITY_INIT,
+    //         ori_ini: ORIENTATION_INIT,
+    //         ave_ini: ANGULAR_VEL_INIT
+    //     }
+    // );
+    // let state_co = State::create_randomly_from_intervals(
+    //     Conditions{
+    //         mn:      MOLECULE_NUMBER,
+    //         molecule_type: MolecularType::CO,
+    //         pos_dom: POSITION_DOMAIN,
+    //         vel_ini: VELOCITY_INIT,
+    //         ori_ini: ORIENTATION_INIT,
+    //         ave_ini: ANGULAR_VEL_INIT
+    //     }
+    // );
+    // let state_co2 = State::create_randomly_from_intervals(
+    //     Conditions{
+    //         mn:      MOLECULE_NUMBER,
+    //         molecule_type: MolecularType::CO2,
+    //         pos_dom: POSITION_DOMAIN,
+    //         vel_ini: VELOCITY_INIT,
+    //         ori_ini: ORIENTATION_INIT,
+    //         ave_ini: ANGULAR_VEL_INIT
+    //     }
+    // );
+    // let new_state:states::State = State::from_vec_coupling(
+    //     vec![state_h2, state_h2o, state_co, state_co2]
+    // );
+
+    let new_state:states::State = State::from_vec_coupling(vec![
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::CO,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        ),
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::CO2,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        ),
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::H2,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        ),
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::H2O,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        ),
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::N2,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        ),
+        State::create_randomly_from_intervals(
+            Conditions{
+                mn:      MOLECULE_NUMBER,
+                molecule_type: MolecularType::O2,
+                pos_dom: POSITION_DOMAIN,
+                vel_ini: VELOCITY_INIT,
+                ori_ini: ORIENTATION_INIT,
+                ave_ini: ANGULAR_VEL_INIT
+            }
+        )
+    ]);
+
 
     let mut new_history = History::create(&new_state);
-    new_history.update(&new_state, &1.2);
-
-    let inverted_new_history = new_history.invert();
+    new_history.update(&new_state, &1.);
 
 
     // for hist in [new_history] {
@@ -140,18 +191,18 @@ fn main() {
     // };
 
     
-    println!();
-    println!();
-    println!("-------------");
-    println!("History:");
-    new_history.invert_and_print();
+    // println!();
+    // println!();
+    // println!("-------------");
+    // println!("History:");
+    // new_history.invert_and_print();
 
 
-    println!();
-    println!();
-    println!("-------------");
-    println!("State:");
-    new_state.invert_and_print();
+    // println!();
+    // println!();
+    // println!("-------------");
+    // println!("State:");
+    // new_state.invert_and_print();
     
     let s = serde_json::to_string(&new_history.invert()).unwrap();
     // println!("{}", s);

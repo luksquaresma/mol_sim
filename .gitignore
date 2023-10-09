@@ -5,3 +5,5 @@ mol_sim/Cargo.lock
 
 
 **/.obsidian
+
+__pycache__/

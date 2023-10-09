@@ -1,16 +1,13 @@
 use {
     crate::{
-        constants::Constants::AN,
+        constants::AN,
         states::StateVariables
     },
     serde::{
         Deserialize,
         Serialize
     },
-    std::{
-        collections::HashMap,
-        ops::Deref
-    },
+    std::collections::HashMap,
 };
 
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
