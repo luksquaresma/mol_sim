@@ -1,15 +1,19 @@
 use {
+    crate::{
+        constants::Constants::AN,
+        states::StateVariables
+    },
+    serde::{
+        Deserialize,
+        Serialize
+    },
     std::{
         collections::HashMap,
         ops::Deref
     },
-    crate::{
-        constants::Constants::AN,
-        states::StateVariables
-    }
 };
 
-#[derive(Clone, Debug, PartialEq)]
+#[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
 pub enum MolecularType {H2, H2O, CO, CO2, N2, O2}
 impl MolecularType {
     pub fn get_mass(&self) -> f64 {
@@ -30,17 +34,19 @@ impl MolecularType {
     }
 }
 
-
 pub struct Molecule {
     pub molecular_type: MolecularType,
     pub mass:           f64,
     pub polarity:       f64
 }
 
+
+
 pub trait MoleculeData {
     fn print(&self) {}
 }
 
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct MoleculeState {
     pub id:         u64,
     pub mol_type:   MolecularType,
@@ -58,6 +64,7 @@ impl MoleculeData for MoleculeState {
     }
 }
 
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct MoleculeDynamicState {
     pub parent: MoleculeState,
     pub t:  f64,
@@ -71,7 +78,7 @@ impl Deref for MoleculeDynamicState {
 impl MoleculeData for MoleculeDynamicState {
     fn print(&self) {
         println!();
-        println!("TIME: {:?}",               self.t);
+        println!("TIME {:?}", self.t);
         println!("MOLECULE ID: {:?}",        self.id);
         println!("MOLECULE TYPE: {:?}",      self.mol_type);
         println!("POSITION: {:.2?}",         self.var[&StateVariables::Position]);
@@ -80,6 +87,8 @@ impl MoleculeData for MoleculeDynamicState {
         println!("ANGULAR_VELOCITY: {:.2?}", self.var[&StateVariables::AngularVelocity]);
     }
 }
+
+
 
 pub const MOLECULE_DOMAIN:[Molecule; 6] = {
     [

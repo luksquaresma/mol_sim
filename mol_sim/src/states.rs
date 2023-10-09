@@ -1,8 +1,4 @@
 use {
-    std::{
-        collections::HashMap,
-        any::TypeId
-    },
     crate::{
         molecules::{
             MoleculeData,
@@ -11,10 +7,15 @@ use {
             MolecularType
         },
         conditions::Conditions
-    }
+    },
+    serde::{
+        Deserialize,
+        Serialize
+    },
+    std::collections::HashMap,
 };
 
-pub trait Data<T> where T: MoleculeData {
+pub trait Data<T: MoleculeData> {
     fn invert(&self) -> Vec<T>;
     fn invert_and_print(&self) {
         for ms in self.invert().iter() {
@@ -23,10 +24,10 @@ pub trait Data<T> where T: MoleculeData {
     }
 }
 
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum StateVariables {Position, Velocity, Orientation, AngularVelocity}
 
-#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum StateIntrinsic {Mass, Polarity}
 
 #[derive(Clone, Debug)]
@@ -142,7 +143,7 @@ impl State {
 }
 
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct History {
     pub var:  HashMap<StateVariables, Vec<Vec<Vec<f64>>>>,
     pub pro:  HashMap<StateIntrinsic, Vec<f64>>,

@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 json = "0.12.4"
-polars = "0.33.2"
 rand = "0.8.5"
+serde = {version = "1.0.188", features = ["derive"]}
+serde_json = "1.0.107"

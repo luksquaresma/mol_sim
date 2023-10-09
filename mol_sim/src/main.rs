@@ -3,9 +3,12 @@
 /// TODO LIST
 /// |X| Divide the codse into different files using modules
 /// 
+/// |X| Learned how to use the standard behavior in traits
+///  
 /// | | Create method to save the created/processed data
-///     | | History definition (Vec!<State>) - State(time)
+///     |X| History definition (Vec!<State>) - State(time)
 ///     | | Save files in an organized and generalized way
+///         |X| Standard serializarion for print MoleculeData
 /// 
 /// | | Create the system iteraction methods and funcitons
 ///     | | System itself (dynamic velocity/position variations)
@@ -22,10 +25,22 @@ pub mod states;
 
 // Packages
 // use json::{JsonValue, object};
-use crate::{
-    molecules::MolecularType,
-    conditions::Conditions,
-    states::{Data, History, State}
+use {
+    crate::{
+        molecules::MolecularType,
+        conditions::Conditions,
+        states::{
+            Data, 
+            History, 
+            State
+        }
+    },
+    serde::{
+        Deserialize,
+        Serialize,
+        Serializer
+    },
+    serde_json
 };
 
 
@@ -139,7 +154,9 @@ fn main() {
     println!("-------------");
     println!("State:");
     new_state.invert_and_print();
-
+    
+    let s = serde_json::to_string(&new_history.invert()).unwrap();
+    println!("{}", s)
 
 
     // for state in [new_state] {
