@@ -1,10 +1,7 @@
 // Video tags: rust, model, computational, modeling, modelling, simulator, simulation, atom, atomic, modelucle, molecular, learning, code
 
 /// TODO LIST
-/// |X| Divide the codse into different files using modules
 /// 
-/// |X| Learned how to use the standard behavior in traits
-///  
 /// | | Create method to save the created/processed data
 ///     |X| History definition (Vec!<State>) - State(time)
 ///     | | Save files in an organized and generalized way
@@ -40,7 +37,8 @@ use {
         Serialize,
         Serializer
     },
-    serde_json
+    serde_json,
+    std::fs::write
 };
 
 
@@ -156,7 +154,9 @@ fn main() {
     new_state.invert_and_print();
     
     let s = serde_json::to_string(&new_history.invert()).unwrap();
-    println!("{}", s)
+    // println!("{}", s);
+
+    write(&"/home/luks/Projects/mol_sim/data/test.json", &s).expect("Unable to write json file");
 
 
     // for state in [new_state] {

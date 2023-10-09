@@ -66,14 +66,10 @@ impl MoleculeData for MoleculeState {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct MoleculeDynamicState {
-    pub parent: MoleculeState,
     pub t:  f64,
-}
-impl Deref for MoleculeDynamicState {
-    type Target = MoleculeState;
-    fn deref(&self) -> &Self::Target {
-        &self.parent
-    }
+    pub id:         u64,
+    pub mol_type:   MolecularType,
+    pub var:        HashMap<StateVariables, Vec<f64>>
 }
 impl MoleculeData for MoleculeDynamicState {
     fn print(&self) {

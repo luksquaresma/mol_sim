@@ -181,15 +181,13 @@ impl Data <MoleculeDynamicState> for History {
         self.typ.iter().enumerate().map(
             |(im, typ)|
             MoleculeDynamicState {
-                parent: MoleculeState {
-                    id: im as u64,
-                    mol_type: typ.clone(),
-                    var: self.var.iter().map(
-                        |(k, val_h)|
-                        (*k, val_h[it][im].clone())
-                    ).collect::<HashMap<StateVariables, Vec<f64>>>()
-                },
-                t:*t
+                t:*t,
+                id: im as u64,
+                mol_type: typ.clone(),
+                var: self.var.iter().map(
+                    |(k, val_h)|
+                    (*k, val_h[it][im].clone())
+                ).collect::<HashMap<StateVariables, Vec<f64>>>()
             }
         ).collect::<Vec<MoleculeDynamicState>>()
     ).collect::<Vec<MoleculeDynamicState>>();
