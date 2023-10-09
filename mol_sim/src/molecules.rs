@@ -7,27 +7,68 @@ use {
         Deserialize,
         Serialize
     },
-    std::collections::HashMap,
+    serde_json,
+    std::{
+        collections::HashMap,
+        fs::write
+    },
 };
 
-#[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, PartialEq, Deserialize, Serialize)]
 pub enum MolecularType {H2, H2O, CO, CO2, N2, O2}
 impl MolecularType {
+    pub fn molecule_from_type(&self) -> Molecule {
+        // MolecularType::molecule_from_type(MolecularType::H2)
+        return match self {
+            MolecularType::CO => Molecule {
+                molecular_type: *self,
+                mass:           ((12.01 + 16.)/1000.)/AN,
+                polarity:       0.112*(3.33564e-30)
+                },
+            MolecularType::CO2 => Molecule {
+                molecular_type: *self,
+                mass:           ((12.01 + 2.*16.)/1000.)/AN,
+                polarity:       0.*(3.33564e-30)
+            },
+            MolecularType::H2 => Molecule {
+                molecular_type: *self,
+                mass:           (1.008*2./1000.)/AN,
+                polarity:       0.
+            },
+            MolecularType::H2O =>  Molecule {
+                molecular_type: *self,
+                mass:           ((1.008*2. + 16.)/1000.)/AN,
+                polarity:       1.85*(3.33564e-30)
+            },
+            MolecularType::N2 => Molecule {
+                molecular_type: *self,
+                mass:           ((2.*14.01)/1000.)/AN,
+                polarity:       0.*(3.33564e-30)
+            },
+            MolecularType::O2 => Molecule {
+                molecular_type: *self,
+                mass:           ((2.*16.)/1000.)/AN,
+                polarity:       0.*(3.33564e-30)
+            }
+        };
+    }
     pub fn get_mass(&self) -> f64 {
-        return match MOLECULE_DOMAIN.iter().find(
-            |m| m.molecular_type == *self
-        ) {
-            Some(molecule) => molecule.mass,
-            None => panic!("Molecule not find!"), 
-        }
+        return MolecularType::molecule_from_type(&self).mass; 
+        // return match MoleculeDomain.iter().find(
+        //     |m| m.molecular_type == *self
+        // ) {
+        //     Some(molecule) => molecule.mass,
+        //     None => panic!("Molecule not find!"), 
+        // }
     }
     pub fn get_polarity(&self) -> f64 {
-        return match MOLECULE_DOMAIN.iter().find(
-            |m| m.molecular_type == *self
-        ) {
-            Some(molecule) => molecule.polarity,
-            None => panic!("Molecule not find!"), // Default value if Alice is not found
-        }
+        return MolecularType::molecule_from_type(&self).polarity; 
+        // return match MoleculeDomain.iter().find(
+        //     |m| m.molecular_type == *self
+        // ) {
+        //     Some(molecule) => molecule.polarity,
+        //     None => panic!("Molecule not find!"), // Default value if Alice is not found
+        // }
     }
 }
 
@@ -63,7 +104,7 @@ impl MoleculeData for MoleculeState {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct MoleculeDynamicState {
-    pub t:  f64,
+    pub t:          f64,
     pub id:         u64,
     pub mol_type:   MolecularType,
     pub var:        HashMap<StateVariables, Vec<f64>>
@@ -81,39 +122,44 @@ impl MoleculeData for MoleculeDynamicState {
     }
 }
 
+// #[derive(Clone, Debug, Deserialize, Serialize)]
+// pub enum MoleculeDomain {
+//     Molecule {
+//             molecular_type: crate::MolecularType,
+//             mass:           ((12.01 + 16.)/1000.)/AN,
+//             polarity:       0.112*(3.33564e-30)
+//     },
+//     Molecule {
+//         molecular_type: MolecularType::CO2,
+//         mass:           ((12.01 + 2.*16.)/1000.)/AN,
+//         polarity:       0.*(3.33564e-30)
+//     },
+//     Molecule {
+//         molecular_type: MolecularType::H2,
+//         mass:           (1.008*2./1000.)/AN,
+//         polarity:       0.
+//     },
+//     Molecule {
+//         molecular_type: MolecularType::H2O,
+//         mass:           ((1.008*2. + 16.)/1000.)/AN,
+//         polarity:       1.85*(3.33564e-30)
+//     },
+//     Molecule {
+//         molecular_type: MolecularType::N2,
+//         mass:           ((2.*14.01)/1000.)/AN,
+//         polarity:       0.*(3.33564e-30)
+//     },
+//     Molecule {
+//         molecular_type: MolecularType::O2,
+//         mass:           ((2.*16.)/1000.)/AN,
+//         polarity:       0.*(3.33564e-30)
+//     }
+// };
 
+// pub fn save_molecules(save_path:&str) {
+//     write(
+//         save_path, 
+//         &serde_json::to_string_pretty(&MoleculeDomain).unwrap() //::to_string_pretty
+//     ).expect("Unable to write json file");
+// }
 
-pub const MOLECULE_DOMAIN:[Molecule; 6] = {
-    [
-        Molecule {
-            molecular_type: MolecularType::CO,
-            mass:           ((12.01 + 16.)/1000.)/AN,
-            polarity:       0.112*(3.33564e-30)
-        },
-        Molecule {
-            molecular_type: MolecularType::CO2,
-            mass:           ((12.01 + 2.*16.)/1000.)/AN,
-            polarity:       0.*(3.33564e-30)
-        },
-        Molecule {
-            molecular_type: MolecularType::H2,
-            mass:           (1.008*2./1000.)/AN,
-            polarity:       0.
-        },
-        Molecule {
-            molecular_type: MolecularType::H2O,
-            mass:           ((1.008*2. + 16.)/1000.)/AN,
-            polarity:       1.85*(3.33564e-30)
-        },
-        Molecule {
-            molecular_type: MolecularType::N2,
-            mass:           ((2.*14.01)/1000.)/AN,
-            polarity:       0.*(3.33564e-30)
-        },
-        Molecule {
-            molecular_type: MolecularType::O2,
-            mass:           ((2.*16.)/1000.)/AN,
-            polarity:       0.*(3.33564e-30)
-        }
-    ]
-};

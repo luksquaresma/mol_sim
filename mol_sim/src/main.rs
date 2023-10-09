@@ -3,9 +3,20 @@
 /// TODO LIST
 /// 
 /// | | Create method to save the created/processed data
-///     |X| History definition (Vec!<State>) - State(time)
 ///     |X| Save files in an organized and generalized way
 ///         |X| Standard serializarion for print MoleculeData
+///         |X| Json saving implementation
+///     | | Save tabular data directly using polars
+/// 
+/// |X| Create a way to load
+///     |X| Read saved History (JSON) via pandas in python
+/// 
+/// | | Visualizations of the molecules
+///     | | 3D representation of the molecules in space (how atoms 
+///         are arenged arount the molecule coordenate origin)
+///     | | Instant state visualization (image)
+///     | | Animation of the molecules over time
+///         (plotly trace with sliders in python)
 /// 
 /// | | Create the system iteraction methods and funcitons
 ///     | | System itself (dynamic velocity/position variations)
@@ -22,24 +33,19 @@ pub mod states;
 
 // Packages
 // use json::{JsonValue, object};
-use {
-    crate::{
+use crate::{
         molecules::MolecularType,
         conditions::Conditions,
         states::{
-            Data, 
             History, 
             State
         }
-    },
-    serde_json,
-    std::fs::write
-};
+    };
 
 
 // Processing defs
 pub const DT:f64 = 1./100.;
-pub const MOLECULE_NUMBER:u64 = 100000;
+pub const MOLECULE_NUMBER:u64 = 10000;
 pub const POSITION_DOMAIN:[[f64; 2]; 3] = [
     [ 0.,  1.], // [x_min, x_max]
     [ 0.,  2.], // [y_min, y_max]
@@ -203,12 +209,7 @@ fn main() {
     // println!("-------------");
     // println!("State:");
     // new_state.invert_and_print();
-    
-    let s = serde_json::to_string(&new_history.invert()).unwrap();
-    // println!("{}", s);
-
-    write(&"/home/luks/Projects/mol_sim/data/test.json", &s).expect("Unable to write json file");
-
+    new_history.to_json(&"/home/luks/Projects/mol_sim/data/test.json");
 
     // for state in [new_state] {
     //     println!("Molecules:");

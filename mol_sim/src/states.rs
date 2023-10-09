@@ -12,7 +12,11 @@ use {
         Deserialize,
         Serialize
     },
-    std::collections::HashMap,
+    serde_json,
+    std::{
+        collections::HashMap,
+        fs::write
+    },
 };
 
 pub trait Data<T: MoleculeData> {
@@ -173,6 +177,12 @@ impl History {
         };
         self.time.append(&mut vec![*t]);
     }
+    pub fn to_json(&self, save_path:&str) {
+        write(
+            save_path, 
+            &serde_json::to_vec_pretty(&self.invert()).unwrap() //::to_string_pretty
+        ).expect("Unable to write json file");
+    }   
 }
 impl Data <MoleculeDynamicState> for History {
     fn invert(&self) -> Vec<MoleculeDynamicState> {
