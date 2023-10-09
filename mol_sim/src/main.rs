@@ -1,9 +1,7 @@
 // Video tags: rust, model, computational, modeling, modelling, simulator, simulation, atom, atomic, modelucle, molecular, learning, code
 
 /// TODO LIST
-/// |X| Create molecules based on a selection of each molecule type, 
-///     so there is only one molecule propriety declaration
-///
+/// |X| Divide the codse into different files using modules
 /// 
 /// | | Create method to save the created/processed data
 ///     | | History definition (Vec!<State>) - State(time)
@@ -27,8 +25,7 @@ pub mod states;
 use crate::{
     molecules::MolecularType,
     conditions::Conditions,
-    states::State,
-    states::History
+    states::{Data, History, State}
 };
 
 
@@ -101,7 +98,7 @@ fn main() {
     // let new_state = state_h2.from_vec_coupling(
     //     vec![state_h2o, state_co, state_co2]
     // );
-    let new_state = State::from_vec_coupling(
+    let new_state:states::State = State::from_vec_coupling(
         vec![state_h2, state_h2o, state_co, state_co2]
     );
     let inverted_new_state = new_state.invert();
@@ -109,41 +106,39 @@ fn main() {
     let mut new_history = History::create(&new_state);
     new_history.update(&new_state, &1.2);
 
-    for hist in [new_history] {
-        println!("Molecules:");
-        println!("{:?}", hist.ids);
-        for (k, v) in hist.pro.iter() {
-            println!("KEY: {:?}", k);
-            println!("{:?}", v)
-            // println!("{:.2?}", v)
-        };
-        for (k, v) in hist.var.iter() {
-            println!("KEY: {:?}", k);
-            for (i, vv) in v.iter().enumerate() {
-                print!("time == {}", hist.time[i]);
-                println!("{:.2?}", vv);
-            }
-        };
-    };
+    let inverted_new_history = new_history.invert();
 
-    
 
-    // for i_state in [inverted_new_state] {
-    //     for m in i_state.iter() {
-    //         println!();
-    //         println!("MOLECULE ID: {:?}", m.id);
-    //         println!("MOLECULE TYPE: {:?}", m.mol_type);
-    //         println!("POSITION: {:.2?}", m.var[&StateVariables::Position]);
-    //         println!("VELOCITY: {:.2?}", m.var[&StateVariables::Velocity]);
-    //         println!("ORIENTATION: {:.2?}", m.var[&StateVariables::Orientation]);
-    //         println!("ANGULAR_VELOCITY: {:.2?}", m.var[&StateVariables::AngularVelocity]);
+    // for hist in [new_history] {
+    //     println!("Molecules:");
+    //     println!("{:?}", hist.ids);
+    //     for (k, v) in hist.pro.iter() {
+    //         println!("KEY: {:?}", k);
+    //         println!("{:?}", v)
+    //         // println!("{:.2?}", v)
+    //     };
+    //     for (k, v) in hist.var.iter() {
+    //         println!("KEY: {:?}", k);
+    //         for (i, vv) in v.iter().enumerate() {
+    //             print!("time == {}", hist.time[i]);
+    //             println!("{:.2?}", vv);
+    //         }
     //     };
     // };
 
+    
+    println!();
+    println!();
+    println!("-------------");
+    println!("History:");
+    new_history.invert_and_print();
 
 
-
-
+    println!();
+    println!();
+    println!("-------------");
+    println!("State:");
+    new_state.invert_and_print();
 
 
 

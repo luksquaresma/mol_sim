@@ -1,11 +1,27 @@
 use {
-    std::collections::HashMap,
+    std::{
+        collections::HashMap,
+        any::TypeId
+    },
     crate::{
-        molecules::MolecularType,
+        molecules::{
+            MoleculeData,
+            MoleculeState,
+            MoleculeDynamicState,
+            MolecularType
+        },
         conditions::Conditions
     }
 };
 
+pub trait Data<T> where T: MoleculeData {
+    fn invert(&self) -> Vec<T>;
+    fn invert_and_print(&self) {
+        for ms in self.invert().iter() {
+            ms.print()
+        }
+    }
+}
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub enum StateVariables {Position, Velocity, Orientation, AngularVelocity}
@@ -13,21 +29,15 @@ pub enum StateVariables {Position, Velocity, Orientation, AngularVelocity}
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub enum StateIntrinsic {Mass, Polarity}
 
-pub struct MoleculeState {
-    pub id:         u64,
-    pub mol_type:   MolecularType,
-    pub var:        HashMap<StateVariables, Vec<f64>>
-}
-
 #[derive(Clone, Debug)]
 pub struct State {
     pub var: HashMap<StateVariables,  Vec<Vec<f64>>>, // Change with t
     pub pro: HashMap<StateIntrinsic,  Vec<f64>>,      // Dosen't change with t
-    pub ids: Vec<MolecularType>,                      // Dosen't change with t
+    pub typ: Vec<MolecularType>,                      // Dosen't change with t
 }
-impl State {
-    pub fn invert(&self) -> Vec<MoleculeState> {
-        return self.ids.iter().enumerate().map(
+impl Data <MoleculeState> for State {
+    fn invert(&self) -> Vec<MoleculeState> {
+        return self.typ.iter().enumerate().map(
             |(i, val)| 
             MoleculeState {
                 id: i as u64,
@@ -39,6 +49,8 @@ impl State {
             }
         ).collect::<Vec<MoleculeState>>()
     }
+}
+impl State {
     fn couple(self, other:State) -> State {
         return State {
             var: {
@@ -63,8 +75,8 @@ impl State {
                 }
                 result
             },
-            ids: {
-                [self.ids, other.ids].iter().flat_map(
+            typ: {
+                [self.typ, other.typ].iter().flat_map(
                     |vec| vec.iter().cloned()
                 ).collect::<Vec<MolecularType>>()
             }
@@ -124,18 +136,32 @@ impl State {
                     ).collect::<Vec<f64>>()
                 )
             ]),
-            ids: (0..mn).map(|_| cs.molecule_type.clone()).collect::<Vec<MolecularType>>()
+            typ: (0..mn).map(|_| cs.molecule_type.clone()).collect::<Vec<MolecularType>>()
         }
     }
 }
+
+
 #[derive(Clone, Debug)]
 pub struct History {
     pub var:  HashMap<StateVariables, Vec<Vec<Vec<f64>>>>,
     pub pro:  HashMap<StateIntrinsic, Vec<f64>>,
-    pub ids:  Vec<MolecularType>,
+    pub typ:  Vec<MolecularType>,
     pub time: Vec<f64>,
 }
 impl History {
+    pub fn create(state:&State) -> History {
+        return History {
+            var: state.clone().var.iter().map(
+                |(k, val)| (*k, vec![val.clone()])
+            ).collect(),
+            pro: state.clone().pro.iter().map(
+                |(k, val)| (*k, val.clone())
+            ).collect(),
+            typ: state.typ.clone(),
+            time: vec![0.]
+        }
+    }
     pub fn update(&mut self, state:&State, t:&f64) {
         for k in self.clone().var.keys() {
             self.var.insert(
@@ -146,17 +172,25 @@ impl History {
         };
         self.time.append(&mut vec![*t]);
     }
-    pub fn create(state:&State) -> History {
-        return History {
-            var: state.clone().var.iter().map(
-                |(k, val)| (*k, vec![val.clone()])
-            ).collect(),
-            pro: state.clone().pro.iter().map(
-                |(k, val)| (*k, val.clone())
-            ).collect(),
-            ids: state.ids.clone(),
-            time: vec![0.]
-        }
+}
+impl Data <MoleculeDynamicState> for History {
+    fn invert(&self) -> Vec<MoleculeDynamicState> {
+    return self.time.iter().enumerate().flat_map(
+        |(it, t)|
+        self.typ.iter().enumerate().map(
+            |(im, typ)|
+            MoleculeDynamicState {
+                parent: MoleculeState {
+                    id: im as u64,
+                    mol_type: typ.clone(),
+                    var: self.var.iter().map(
+                        |(k, val_h)|
+                        (*k, val_h[it][im].clone())
+                    ).collect::<HashMap<StateVariables, Vec<f64>>>()
+                },
+                t:*t
+            }
+        ).collect::<Vec<MoleculeDynamicState>>()
+    ).collect::<Vec<MoleculeDynamicState>>();
     }
 }
-

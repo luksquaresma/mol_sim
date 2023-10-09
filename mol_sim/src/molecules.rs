@@ -1,4 +1,13 @@
-use crate::constants::Constants::AN;
+use {
+    std::{
+        collections::HashMap,
+        ops::Deref
+    },
+    crate::{
+        constants::Constants::AN,
+        states::StateVariables
+    }
+};
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum MolecularType {H2, H2O, CO, CO2, N2, O2}
@@ -28,6 +37,49 @@ pub struct Molecule {
     pub polarity:       f64
 }
 
+pub trait MoleculeData {
+    fn print(&self) {}
+}
+
+pub struct MoleculeState {
+    pub id:         u64,
+    pub mol_type:   MolecularType,
+    pub var:        HashMap<StateVariables, Vec<f64>>
+}
+impl MoleculeData for MoleculeState {
+    fn print(&self) {
+        println!();
+        println!("MOLECULE ID: {:?}",        self.id);
+        println!("MOLECULE TYPE: {:?}",      self.mol_type);
+        println!("POSITION: {:.2?}",         self.var[&StateVariables::Position]);
+        println!("VELOCITY: {:.2?}",         self.var[&StateVariables::Velocity]);
+        println!("ORIENTATION: {:.2?}",      self.var[&StateVariables::Orientation]);
+        println!("ANGULAR_VELOCITY: {:.2?}", self.var[&StateVariables::AngularVelocity]);
+    }
+}
+
+pub struct MoleculeDynamicState {
+    pub parent: MoleculeState,
+    pub t:  f64,
+}
+impl Deref for MoleculeDynamicState {
+    type Target = MoleculeState;
+    fn deref(&self) -> &Self::Target {
+        &self.parent
+    }
+}
+impl MoleculeData for MoleculeDynamicState {
+    fn print(&self) {
+        println!();
+        println!("TIME: {:?}",               self.t);
+        println!("MOLECULE ID: {:?}",        self.id);
+        println!("MOLECULE TYPE: {:?}",      self.mol_type);
+        println!("POSITION: {:.2?}",         self.var[&StateVariables::Position]);
+        println!("VELOCITY: {:.2?}",         self.var[&StateVariables::Velocity]);
+        println!("ORIENTATION: {:.2?}",      self.var[&StateVariables::Orientation]);
+        println!("ANGULAR_VELOCITY: {:.2?}", self.var[&StateVariables::AngularVelocity]);
+    }
+}
 
 pub const MOLECULE_DOMAIN:[Molecule; 6] = {
     [
