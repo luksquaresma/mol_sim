@@ -18,7 +18,8 @@ The notes for each session are done separate pages and will be available and lin
 ***Links:***
 - https://github.com/luksquaresma/mol_sim
 - https://www.linkedin.com/in/luksquaresma/
-- https://twitter.com/wtflks	
+- https://twitter.com/wtflks
+- https://www.youtube.com/channel/UCPdG4uzocJnZC6CfZuugQRw
 ---
 ## Code with me sessions
 #todo
