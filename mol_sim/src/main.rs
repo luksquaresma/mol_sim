@@ -210,6 +210,7 @@ fn main() {
     // println!("State:");
     // new_state.invert_and_print();
     new_history.to_json(&"/home/luks/Projects/mol_sim/data/test.json");
+    new_history.save_as_polars_df(&"/home/luks/Projects/mol_sim/data/test.parquet");
 
     // for state in [new_state] {
     //     println!("Molecules:");

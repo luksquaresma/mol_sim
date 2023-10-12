@@ -17,6 +17,16 @@ use {
 #[derive(Clone, Copy, Debug, PartialEq, Deserialize, Serialize)]
 pub enum MolecularType {H2, H2O, CO, CO2, N2, O2}
 impl MolecularType {
+    pub fn name(&self) -> &str {
+        return match self {
+            MolecularType::H2   => "H2",
+            MolecularType::H2O  => "H2O",
+            MolecularType::CO   => "CO",
+            MolecularType::CO2  => "CO2",
+            MolecularType::N2   => "N2",
+            MolecularType::O2   => "O2"
+        }
+    }
     pub fn molecule_from_type(&self) -> Molecule {
         // MolecularType::molecule_from_type(MolecularType::H2)
         return match self {

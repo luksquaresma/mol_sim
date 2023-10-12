@@ -1,3 +1,7 @@
+use std::iter::FlatMap;
+
+use polars::prelude::DataFrame;
+
 use {
     crate::{
         molecules::{
@@ -8,6 +12,7 @@ use {
         },
         conditions::Conditions
     },
+    polars::prelude::*,
     serde::{
         Deserialize,
         Serialize
@@ -30,6 +35,33 @@ pub trait Data<T: MoleculeData> {
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum StateVariables {Position, Velocity, Orientation, AngularVelocity}
+impl StateVariables {
+    pub fn name(&self) -> &str {
+        return match self {
+            StateVariables::Position        => "Position",
+            StateVariables::Velocity        => "Velocity",
+            StateVariables::Orientation     => "Orientation",
+            StateVariables::AngularVelocity => "AngularVelocity"
+        }
+    }
+    pub fn coordinate_names(&self) -> Vec<&str> {
+        return match self {
+            StateVariables::Position        => vec!["x", "y", "z"],
+            StateVariables::Velocity        => vec!["x", "y", "z"],
+            StateVariables::Orientation     => vec!["theta", "phi"],
+            StateVariables::AngularVelocity => vec!["theta", "phi"]
+        }
+    }
+    pub fn units(&self) -> &str {
+        return match self {
+            StateVariables::Position        => "m",
+            StateVariables::Velocity        => "m/s",
+            StateVariables::Orientation     => "degree",
+            StateVariables::AngularVelocity => "degree/s"
+        }
+    }
+    
+}
 
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Deserialize, Serialize)]
 pub enum StateIntrinsic {Mass, Polarity}
@@ -182,7 +214,62 @@ impl History {
             save_path, 
             &serde_json::to_vec_pretty(&self.invert()).unwrap() //::to_string_pretty
         ).expect("Unable to write json file");
-    }   
+    }
+    pub fn save_as_polars_df(&self, save_path:&str) {
+        // Create the dataframe from History
+        let var_vecs: Vec<Series> = self.var.iter().flat_map(
+            |(k, var_vec)| 
+            {
+                let name_prefix = k.name();
+
+                let data = var_vec.iter().flat_map(
+                    |var_mol| var_mol.clone()
+                    ).collect::<Vec<Vec<f64>>>();
+                
+                k.coordinate_names().iter().enumerate().map(
+                    |(c_number, c_name)|
+                    Series::new(
+                        &([name_prefix.clone(), "_", c_name].concat()), 
+                        data.iter().map(|v| v[c_number]).collect::<Vec<f64>>()
+                    )
+                ).collect::<Vec<Series>>()
+            }
+        ).collect::<Vec<Series>>();
+
+
+        let typs: Series = Series::new(
+            "mol_type",
+            self.time.iter().flat_map(
+                |_| 
+                self.typ.iter().map(
+                    |mt|
+                    mt.name()
+                ).collect::<Vec<&str>>()
+            ).collect::<Vec<&str>>()
+        );
+
+        let ts: Series = Series::new(
+            "t",
+            self.time.iter().flat_map(
+                |t| 
+                self.typ.iter().map(
+                    |_|
+                    t.clone()
+                ).collect::<Vec<f64>>()
+            ).collect::<Vec<f64>>()
+        );
+        
+        let mut data = DataFrame::new(
+            [vec![ts, typs], var_vecs].concat()
+        ).unwrap();
+
+        // Save the data to a file
+        ParquetWriter::new(
+            &mut std::fs::File::create(
+                save_path
+            ).expect("Could not create parquet file!")
+        ).finish(&mut data).unwrap();
+    }
 }
 impl Data <MoleculeDynamicState> for History {
     fn invert(&self) -> Vec<MoleculeDynamicState> {
