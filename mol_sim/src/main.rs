@@ -1,28 +1,5 @@
 // Video tags: rust, model, computational, modeling, modelling, simulator, simulation, atom, atomic, modelucle, molecular, learning, code
 
-/// TODO LIST
-/// 
-/// | | Create method to save the created/processed data
-///     |X| Save files in an organized and generalized way
-///         |X| Standard serializarion for print MoleculeData
-///         |X| Json saving implementation
-///     | | Save tabular data directly using polars
-/// 
-/// |X| Create a way to load
-///     |X| Read saved History (JSON) via pandas in python
-/// 
-/// | | Visualizations of the molecules
-///     | | 3D representation of the molecules in space (how atoms 
-///         are arenged arount the molecule coordenate origin)
-///     | | Instant state visualization (image)
-///     | | Animation of the molecules over time
-///         (plotly trace with sliders in python)
-/// 
-/// | | Create the system iteraction methods and funcitons
-///     | | System itself (dynamic velocity/position variations)
-///     | | Force/iteractions calculations
-/// 
-
 // Modules defined on other files
 pub mod conditions;
 pub mod constants;
@@ -30,9 +7,7 @@ pub mod molecules;
 pub mod states;
 
 
-
 // Packages
-// use json::{JsonValue, object};
 use crate::{
         molecules::MolecularType,
         conditions::Conditions,
@@ -45,7 +20,7 @@ use crate::{
 
 // Processing defs
 pub const DT:f64 = 1./100.;
-pub const MOLECULE_NUMBER:u64 = 10000;
+pub const MOLECULE_NUMBER:u64 = 100000;
 pub const POSITION_DOMAIN:[[f64; 2]; 3] = [
     [ 0.,  1.], // [x_min, x_max]
     [ 0.,  2.], // [y_min, y_max]
