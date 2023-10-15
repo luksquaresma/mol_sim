@@ -23,10 +23,10 @@ Youtube:
 - [MolSim Playlist](https://www.youtube.com/playlist?list=PLCMQbnjuJFBvr9jSHMxt7JkY6gzhoRbfo)
 - [Fist session: MolSim 00 - Theoretical intro](https://youtu.be/PbO4YAI4ucY?si=Ffdb_2MA7TQPcyGZ)
 - [Code starts here: MolSim 01 - Starting to model]()
-- [Overall channel link: wtflks](https://www.youtube.com/channel/UCPdG4uzocJnZC6CfZuugQRw)
+- [Channel: wtflks](https://www.youtube.com/channel/UCPdG4uzocJnZC6CfZuugQRw)
 
 Twitch:
-- [Canall: wtflks](https://www.twitch.tv/wtflks)
+- [Channel: wtflks](https://www.twitch.tv/wtflks)
 ---
 ## Library and main learning resources
 
