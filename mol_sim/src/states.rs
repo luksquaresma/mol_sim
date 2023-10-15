@@ -1,5 +1,3 @@
-use std::iter::FlatMap;
-
 use polars::prelude::DataFrame;
 
 use {
@@ -24,7 +22,7 @@ use {
     },
 };
 
-pub trait Data<T: MoleculeData> {
+trait Data<T: MoleculeData> {
     fn invert(&self) -> Vec<T>;
     fn invert_and_print(&self) {
         for ms in self.invert().iter() {

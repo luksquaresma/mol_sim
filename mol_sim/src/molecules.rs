@@ -7,26 +7,22 @@ use {
         Deserialize,
         Serialize
     },
-    serde_json,
+    // serde_json,
     std::{
         collections::HashMap,
-        fs::write
+        fs::write,
+        iter::Iterator
+    },
+    strum::{
+        EnumIter,
+        IntoEnumIterator,
+        VariantIterator
     },
 };
 
-#[derive(Clone, Copy, Debug, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Copy, Debug, Deserialize, EnumIter, PartialEq, Serialize)]
 pub enum MolecularType {H2, H2O, CO, CO2, N2, O2}
 impl MolecularType {
-    pub fn name(&self) -> &str {
-        return match self {
-            MolecularType::H2   => "H2",
-            MolecularType::H2O  => "H2O",
-            MolecularType::CO   => "CO",
-            MolecularType::CO2  => "CO2",
-            MolecularType::N2   => "N2",
-            MolecularType::O2   => "O2"
-        }
-    }
     pub fn molecule_from_type(&self) -> Molecule {
         // MolecularType::molecule_from_type(MolecularType::H2)
         return match self {
@@ -62,26 +58,35 @@ impl MolecularType {
             }
         };
     }
+    pub fn name(&self) -> &str {
+        return match self {
+            MolecularType::H2   => "H2",
+            MolecularType::H2O  => "H2O",
+            MolecularType::CO   => "CO",
+            MolecularType::CO2  => "CO2",
+            MolecularType::N2   => "N2",
+            MolecularType::O2   => "O2"
+        }
+    }
     pub fn get_mass(&self) -> f64 {
         return MolecularType::molecule_from_type(&self).mass; 
-        // return match MoleculeDomain.iter().find(
-        //     |m| m.molecular_type == *self
-        // ) {
-        //     Some(molecule) => molecule.mass,
-        //     None => panic!("Molecule not find!"), 
-        // }
     }
     pub fn get_polarity(&self) -> f64 {
         return MolecularType::molecule_from_type(&self).polarity; 
-        // return match MoleculeDomain.iter().find(
-        //     |m| m.molecular_type == *self
-        // ) {
-        //     Some(molecule) => molecule.polarity,
-        //     None => panic!("Molecule not find!"), // Default value if Alice is not found
-        // }
+    }
+    pub fn save_standard_data(save_path:&str) {
+        write(
+            save_path, 
+            &serde_json::to_string_pretty(
+                &MolecularType::iter().map(
+                    |mol_typ| MolecularType::molecule_from_type(&mol_typ)
+                ).collect::<Vec<Molecule>>()
+            ).unwrap()
+        ).expect("Unable to write json file");
     }
 }
 
+#[derive(Clone, Copy, Debug, Deserialize, Serialize)]
 pub struct Molecule {
     pub molecular_type: MolecularType,
     pub mass:           f64,
@@ -89,10 +94,10 @@ pub struct Molecule {
 }
 
 
-
 pub trait MoleculeData {
     fn print(&self) {}
 }
+
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct MoleculeState {
@@ -132,44 +137,5 @@ impl MoleculeData for MoleculeDynamicState {
     }
 }
 
-// #[derive(Clone, Debug, Deserialize, Serialize)]
-// pub enum MoleculeDomain {
-//     Molecule {
-//             molecular_type: crate::MolecularType,
-//             mass:           ((12.01 + 16.)/1000.)/AN,
-//             polarity:       0.112*(3.33564e-30)
-//     },
-//     Molecule {
-//         molecular_type: MolecularType::CO2,
-//         mass:           ((12.01 + 2.*16.)/1000.)/AN,
-//         polarity:       0.*(3.33564e-30)
-//     },
-//     Molecule {
-//         molecular_type: MolecularType::H2,
-//         mass:           (1.008*2./1000.)/AN,
-//         polarity:       0.
-//     },
-//     Molecule {
-//         molecular_type: MolecularType::H2O,
-//         mass:           ((1.008*2. + 16.)/1000.)/AN,
-//         polarity:       1.85*(3.33564e-30)
-//     },
-//     Molecule {
-//         molecular_type: MolecularType::N2,
-//         mass:           ((2.*14.01)/1000.)/AN,
-//         polarity:       0.*(3.33564e-30)
-//     },
-//     Molecule {
-//         molecular_type: MolecularType::O2,
-//         mass:           ((2.*16.)/1000.)/AN,
-//         polarity:       0.*(3.33564e-30)
-//     }
-// };
 
-// pub fn save_molecules(save_path:&str) {
-//     write(
-//         save_path, 
-//         &serde_json::to_string_pretty(&MoleculeDomain).unwrap() //::to_string_pretty
-//     ).expect("Unable to write json file");
-// }
 

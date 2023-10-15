@@ -42,50 +42,6 @@ pub const ANGULAR_VEL_INIT:[[f64; 2]; 2] = [
 
 
 fn main() {
-    // let state_h2 = State::create_randomly_from_intervals(
-    //     Conditions{
-    //         mn:      MOLECULE_NUMBER,
-    //         molecule_type: MolecularType::H2,
-    //         pos_dom: POSITION_DOMAIN,
-    //         vel_ini: VELOCITY_INIT,
-    //         ori_ini: ORIENTATION_INIT,
-    //         ave_ini: ANGULAR_VEL_INIT
-    //     }
-    // );
-    // let state_h2o = State::create_randomly_from_intervals(
-    //     Conditions{
-    //         mn:      MOLECULE_NUMBER,
-    //         molecule_type: MolecularType::H2O,
-    //         pos_dom: POSITION_DOMAIN,
-    //         vel_ini: VELOCITY_INIT,
-    //         ori_ini: ORIENTATION_INIT,
-    //         ave_ini: ANGULAR_VEL_INIT
-    //     }
-    // );
-    // let state_co = State::create_randomly_from_intervals(
-    //     Conditions{
-    //         mn:      MOLECULE_NUMBER,
-    //         molecule_type: MolecularType::CO,
-    //         pos_dom: POSITION_DOMAIN,
-    //         vel_ini: VELOCITY_INIT,
-    //         ori_ini: ORIENTATION_INIT,
-    //         ave_ini: ANGULAR_VEL_INIT
-    //     }
-    // );
-    // let state_co2 = State::create_randomly_from_intervals(
-    //     Conditions{
-    //         mn:      MOLECULE_NUMBER,
-    //         molecule_type: MolecularType::CO2,
-    //         pos_dom: POSITION_DOMAIN,
-    //         vel_ini: VELOCITY_INIT,
-    //         ori_ini: ORIENTATION_INIT,
-    //         ave_ini: ANGULAR_VEL_INIT
-    //     }
-    // );
-    // let new_state:states::State = State::from_vec_coupling(
-    //     vec![state_h2, state_h2o, state_co, state_co2]
-    // );
-
     let new_state:states::State = State::from_vec_coupling(vec![
         State::create_randomly_from_intervals(
             Conditions{
@@ -154,52 +110,10 @@ fn main() {
     new_history.update(&new_state, &1.);
 
 
-    // for hist in [new_history] {
-    //     println!("Molecules:");
-    //     println!("{:?}", hist.ids);
-    //     for (k, v) in hist.pro.iter() {
-    //         println!("KEY: {:?}", k);
-    //         println!("{:?}", v)
-    //         // println!("{:.2?}", v)
-    //     };
-    //     for (k, v) in hist.var.iter() {
-    //         println!("KEY: {:?}", k);
-    //         for (i, vv) in v.iter().enumerate() {
-    //             print!("time == {}", hist.time[i]);
-    //             println!("{:.2?}", vv);
-    //         }
-    //     };
-    // };
-
-    
-    // println!();
-    // println!();
-    // println!("-------------");
-    // println!("History:");
-    // new_history.invert_and_print();
-
-
-    // println!();
-    // println!();
-    // println!("-------------");
-    // println!("State:");
-    // new_state.invert_and_print();
     new_history.to_json(&"/home/luks/Projects/mol_sim/data/test.json");
     new_history.save_as_polars_df(&"/home/luks/Projects/mol_sim/data/test.parquet");
+    
+    MolecularType::save_standard_data("/home/luks/Projects/mol_sim/data/std_mol_data.json")
 
-    // for state in [new_state] {
-    //     println!("Molecules:");
-    //     println!("{:?}", state.ids);
-    //     for (k, v) in state.pro.iter() {
-    //         println!("KEY: {:?}", k);
-    //         println!("{:?}", v)
-    //         // println!("{:.2?}", v)
-    //     };
-    //     for (k, v) in state.var.iter() {
-    //         println!("KEY: {:?}", k);
-    //         println!("{:.2?}", v)
-    //         // println!("{:.#2?}", v)
-    //     };
-    // };
-    // // assert!(state.get_contents() == state.get_keys(), "Test is NOT WORKING");
+    // assert!(state.get_contents() == state.get_keys(), "Test is NOT WORKING");
 }
