@@ -1,7 +1,7 @@
 use {
     crate::{
-        constants::AN,
-        states::StateVariables
+        constant::AN,
+        state::StateVariables
     },
     serde::{
         Deserialize,
@@ -16,7 +16,6 @@ use {
     strum::{
         EnumIter,
         IntoEnumIterator,
-        VariantIterator
     },
 };
 

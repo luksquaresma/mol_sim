@@ -1,4 +1,4 @@
-use crate::molecules::MolecularType;
+use crate::molecule::MolecularType;
 
 pub struct Conditions {
     pub mn: u64,    // number of molecules - system proprierty

@@ -6,9 +6,11 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-json = "0.12.4"
-polars = { version = "0.33.2", features = ["parquet"] }
-rand = "0.8.5"
-serde = {version = "1.0.188", features = ["derive"]}
-serde_json = "1.0.107"
-strum = {version = "0.25.0", features = ["derive", "strum_macros"]}
+json            = "0.12.4"
+ndarray         = {version = "0.15.6", features = ["rayon"]}
+ndarray-linalg  = "0.16.0"
+polars          = {version = "0.33.2", features = ["parquet"] }
+rand            = "0.8.5"
+serde           = {version = "1.0.188", features = ["derive"]}
+serde_json      = "1.0.107"
+strum           = {version = "0.25.0", features = ["derive", "strum_macros"]}

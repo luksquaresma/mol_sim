@@ -1,17 +1,18 @@
 // Video tags: rust, model, computational, modeling, modelling, simulator, simulation, atom, atomic, modelucle, molecular, learning, code
 
 // Modules defined on other files
-pub mod conditions;
-pub mod constants;
-pub mod molecules;
-pub mod states;
+pub mod condition;
+pub mod constant;
+pub mod molecule;
+pub mod state;
+pub mod movement;
 
 
 // Packages
 use crate::{
-        molecules::MolecularType,
-        conditions::Conditions,
-        states::{
+        molecule::MolecularType,
+        condition::Conditions,
+        state::{
             History, 
             State
         }
@@ -38,11 +39,18 @@ pub const ORIENTATION_INIT:[[f64; 2]; 2] = [
 pub const ANGULAR_VEL_INIT:[[f64; 2]; 2] = [
     [ 0.,  1.], 
     [ 0.,  1.]
-    ]; 
+    ];
 
+
+fn func_1() {
+    todo!()
+}
+fn func_2(f: fn()) {
+
+}
 
 fn main() {
-    let new_state:states::State = State::from_vec_coupling(vec![
+    let new_state:state::State = State::from_vec_coupling(vec![
         State::create_randomly_from_intervals(
             Conditions{
                 mn:      MOLECULE_NUMBER,

@@ -2,13 +2,13 @@ use polars::prelude::DataFrame;
 
 use {
     crate::{
-        molecules::{
+        molecule::{
             MoleculeData,
             MoleculeState,
             MoleculeDynamicState,
             MolecularType
         },
-        conditions::Conditions
+        condition::Conditions
     },
     polars::prelude::*,
     serde::{
