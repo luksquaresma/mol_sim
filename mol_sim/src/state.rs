@@ -1,5 +1,7 @@
 use polars::prelude::DataFrame;
 
+use crate::domain::ConstructType;
+
 use {
     crate::{
         molecule::{
@@ -86,18 +88,18 @@ impl Data <MoleculeState> for State {
     }
 }
 impl State {
-    fn couple(self, other:State) -> State {
+    pub fn couple(self, other:State) -> State {
         return State {
             var: {
-        let mut result:HashMap<StateVariables,  Vec<Vec<f64>>> = HashMap::new();
-        for k in self.var.keys().clone() {
-            result.insert(*k, {
-                [self.var[k].clone(), other.var[k].clone()].iter().flat_map(
-                    |vec| vec.iter().cloned()
-                ).collect::<Vec<Vec<f64>>>()
-            });
-        }
-        result
+                let mut result:HashMap<StateVariables,  Vec<Vec<f64>>> = HashMap::new();
+                for k in self.var.keys().clone() {
+                    result.insert(*k, {
+                        [self.var[k].clone(), other.var[k].clone()].iter().flat_map(
+                            |vec| vec.iter().cloned()
+                        ).collect::<Vec<Vec<f64>>>()
+                    });
+                }
+                result
             },
             pro: {
                 let mut result:HashMap<StateIntrinsic,  Vec<f64>> = HashMap::new();
@@ -128,50 +130,51 @@ impl State {
         }
         return state
     }
+    
+    // todo: use a domain as an input to generate
     pub fn create_randomly_from_intervals(cs:Conditions) -> State {
-        let (mn, pd, vi, oi, ai) = (cs.mn, cs.pos_dom, cs.vel_ini, cs.ori_ini, cs.ave_ini);
         return State {
             var: HashMap::from([
                 (
-                    StateVariables::Position, (0..mn).map(|_| vec![
-                        pd[0][0] + (pd[0][1] - pd[0][0])*(rand::random::<f64>()), // x
-                        pd[1][0] + (pd[1][1] - pd[1][0])*(rand::random::<f64>()), // y
-                        pd[2][0] + (pd[2][1] - pd[2][0])*(rand::random::<f64>()) // z
+                    StateVariables::Position, (0..cs.mn).map(|_| vec![
+                        cs.pos_dom[0][0] + (cs.pos_dom[0][1] - cs.pos_dom[0][0])*(rand::random::<f64>()), // x
+                        cs.pos_dom[1][0] + (cs.pos_dom[1][1] - cs.pos_dom[1][0])*(rand::random::<f64>()), // y
+                        cs.pos_dom[2][0] + (cs.pos_dom[2][1] - cs.pos_dom[2][0])*(rand::random::<f64>()) // z
                         ]).collect::<Vec<Vec<f64>>>()
                 ),
                 (
-                    StateVariables::Velocity, (0..mn).map(|_| vec![
-                        vi[0][0] + (vi[0][1] - vi[0][0])*(rand::random::<f64>()), // x
-                        vi[1][0] + (vi[1][1] - vi[1][0])*(rand::random::<f64>()), // y
-                        vi[2][0] + (vi[2][1] - vi[2][0])*(rand::random::<f64>()) // z
+                    StateVariables::Velocity, (0..cs.mn).map(|_| vec![
+                        cs.vel_ini[0][0] + (cs.vel_ini[0][1] - cs.vel_ini[0][0])*(rand::random::<f64>()), // x
+                        cs.vel_ini[1][0] + (cs.vel_ini[1][1] - cs.vel_ini[1][0])*(rand::random::<f64>()), // y
+                        cs.vel_ini[2][0] + (cs.vel_ini[2][1] - cs.vel_ini[2][0])*(rand::random::<f64>()) // z
                         ]).collect::<Vec<Vec<f64>>>()
                 ),
                 (
-                    StateVariables::Orientation, (0..mn).map(|_| vec![
-                        oi[0][0] + (oi[0][1] - oi[0][0])*(rand::random::<f64>()), // theta
-                        oi[1][0] + (oi[1][1] - oi[1][0])*(rand::random::<f64>()), // phi
+                    StateVariables::Orientation, (0..cs.mn).map(|_| vec![
+                        cs.ori_ini[0][0] + (cs.ori_ini[0][1] - cs.ori_ini[0][0])*(rand::random::<f64>()), // theta
+                        cs.ori_ini[1][0] + (cs.ori_ini[1][1] - cs.ori_ini[1][0])*(rand::random::<f64>()), // phi
                         ]).collect::<Vec<Vec<f64>>>()
                 ),
                 (
-                    StateVariables::AngularVelocity, (0..mn).map(|_| vec![
-                        ai[0][0] + (ai[0][1] - ai[0][0])*(rand::random::<f64>()), // theta
-                        ai[1][0] + (ai[1][1] - ai[1][0])*(rand::random::<f64>()), // phi
+                    StateVariables::AngularVelocity, (0..cs.mn).map(|_| vec![
+                        cs.ave_ini[0][0] + (cs.ave_ini[0][1] - cs.ave_ini[0][0])*(rand::random::<f64>()), // theta
+                        cs.ave_ini[1][0] + (cs.ave_ini[1][1] - cs.ave_ini[1][0])*(rand::random::<f64>()), // phi
                         ]).collect::<Vec<Vec<f64>>>()
                 )
             ]),
             pro: HashMap::from([
                 (
-                    StateIntrinsic::Mass, (0..mn).map(
+                    StateIntrinsic::Mass, (0..cs.mn).map(
                         |_| cs.molecule_type.get_mass()
                     ).collect::<Vec<f64>>()
                 ),
                 (
-                    StateIntrinsic::Polarity, (0..mn).map(
+                    StateIntrinsic::Polarity, (0..cs.mn).map(
                         |_| cs.molecule_type.get_polarity()
                     ).collect::<Vec<f64>>()
                 )
             ]),
-            typ: (0..mn).map(|_| cs.molecule_type.clone()).collect::<Vec<MolecularType>>()
+            typ: (0..cs.mn).map(|_| cs.molecule_type.clone()).collect::<Vec<MolecularType>>()
         }
     }
 }

@@ -3,6 +3,7 @@
 // Modules defined on other files
 pub mod condition;
 pub mod constant;
+pub mod domain;
 pub mod molecule;
 pub mod state;
 pub mod movement;
