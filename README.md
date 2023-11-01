@@ -1,9 +1,7 @@
----
----
-# MolSim - a molecular simulation tool made in rust
+# MolSim - a molecular dynamics simulator made in rust
+
 ---
 ## Motivation
-
 Molecular simulations are simple examples of systems that can be computationally modeled. This project regards the design of a such model using an incremental approach. 
 
 This is an educational project made with the intention to show all the steps in it’s construction (mathematical, physicochemical and computational) and the actual implementation while learning a new programming language (Rust).
@@ -27,6 +25,7 @@ Youtube:
 
 Twitch:
 - [Channel: wtflks](https://www.twitch.tv/wtflks)
+
 ---
 ## Library and main learning resources
 
